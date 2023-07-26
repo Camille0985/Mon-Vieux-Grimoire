@@ -1,5 +1,5 @@
 const express = require('express');
-//const auth = require('auth');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -11,11 +11,11 @@ router.get('/:id', bookCtrl.getOneBook);
 
 router.get('/bestrating', bookCtrl.getBestBooks);
 
-router.post('/', bookCtrl.createBook);
+router.post('/', auth, bookCtrl.createBook);
 
-router.put('/:id', bookCtrl.modifyBook);
+router.put('/:id', auth, bookCtrl.modifyBook);
 
-router.delete('/:id', bookCtrl.deleteBook);
+router.delete('/:id', auth, bookCtrl.deleteBook);
 
 //router.post('/:id/rating', auth, bookCtrl.rateOneBook);
 
