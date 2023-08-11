@@ -83,18 +83,18 @@ exports.rateOneBook = (req, res, next) => {
     if (userRating) {
       return res.status(400).json({ error });
     }
-      
+
     book.ratings.push({ userId, grade: rating });
-    book.averageRating =
-      (book.ratings.reduce((total, rating) => total + rating.grade, 0) + rating) /
-      (book.ratings.length + 1);
-      return book.save();
+    book.averageRating = (book.ratings.reduce((total, rating) => total + rating.grade, 0) + rating) / (book.ratings.length + 1);
+      
+    book.averageRating = book.averageRating.toFixed(1);
+      
+    return book.save();
   })
   .then((book) => {
     return Book.findByIdAndUpdate(req.params.id, book, { new: true });
   })
   .then((updatedBook) => {
-    updatedBook.averageRating = updatedBook.averageRating.toFixed(1);
     res.status(200).json(updatedBook);
   })
   .catch((error) => {
