@@ -17,7 +17,7 @@ router.post('/', auth, multer, sharp, bookCtrl.createBook);
 
 router.put('/:id', auth, multer, sharp, bookCtrl.modifyBook);
 
-router.delete('/:id', auth, multer, bookCtrl.deleteBook);
+router.delete('/:id', auth, bookCtrl.deleteBook);
 
 router.post('/:id/rating', auth, bookCtrl.rateOneBook);
 
