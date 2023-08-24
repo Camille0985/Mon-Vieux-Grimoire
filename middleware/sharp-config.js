@@ -21,9 +21,7 @@ module.exports = (req, res, next) => {
       if (err) {
         console.error('Erreur lors du redimensionnement de l\'image :', err);
       } else {
-        if (req.file.filename.endsWith('.png')) {
-          fs.unlinkSync(inputImagePath);
-        }
+        fs.unlinkSync(inputImagePath);
       }
     });
 
